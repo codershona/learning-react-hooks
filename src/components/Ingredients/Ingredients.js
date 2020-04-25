@@ -33,8 +33,11 @@ const Ingredients = () => {
 
 
    	});
+   	 // Used like this, (with [] as a second argument), ueEffect() acts like componentDidMount : It runs ONLY ONCE (after the first render).
+   	 
 
-   }, []);
+   }, []); 
+
 
    
 
