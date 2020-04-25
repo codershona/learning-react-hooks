@@ -34,12 +34,15 @@ const Ingredients = () => {
 
    	});
    	 // Used like this, (with [] as a second argument), ueEffect() acts like componentDidMount : It runs ONLY ONCE (after the first render).
-   	 
+
 
    }, []); 
 
 
-   
+   useEffect(() => {
+   	console.log('RENDERING INGREDIENTS', userIngredients);
+
+   }, [userIngredients]);
 
 
    const addIngredientHandler = ingredient => {
