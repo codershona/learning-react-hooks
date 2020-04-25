@@ -9,9 +9,12 @@ const IngredientForm = React.memo(props => {
 
   const [enteredAmount, setEnteredAmount] = useState(''); 
   
-
+  // if (true) {
+  //   useState();
+  // }
 
   const submitHandler = event => {
+     // useState();
     event.preventDefault();
     // ...
   };
@@ -51,7 +54,7 @@ const IngredientForm = React.memo(props => {
             onChange={event => {
             
             setEnteredAmount(event.target.value);
-            
+
               }
             }
             />
