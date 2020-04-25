@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -7,9 +7,38 @@ import IngredientList from './IngredientList';
 
 const Ingredients = () => {
 
-	const [ userIngredients, setUserIngredients ] = useState([]);
+  const [ userIngredients, setUserIngredients ] = useState([]);
+
+  // Used like this, useEffect() acts like componentDidMoun: it runs the function AFTER EVERY component update (re-render).
+
+
+   useEffect(() => {
+
+   	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json')
+   	.then(response => response.json())
+   	 .then(responseData => {
+   		const loadedIngredients = [];
+   		for (const key in responseData) {
+   			loadedIngredients.push({
+   				id: key,
+   				title: responseData[key].title,
+   				amount: responseData[key].amount
+
+
+   			});
+
+   		}
+
+   setUserIngredients(loadedIngredients);
+
+
+   	});
+
+   }, []);
 
    
+
+
    const addIngredientHandler = ingredient => {
    	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json', {
    		method: 'POST',
