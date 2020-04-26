@@ -5,11 +5,15 @@ import Search from './Search';
 
 import IngredientList from './IngredientList';
 
+import ErrorModal from '../UI/ErrorModal';
+
 const Ingredients = () => {
 
   const [ userIngredients, setUserIngredients ] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState();
 
 
   // Used like this, useEffect() acts like componentDidMoun: it runs the function AFTER EVERY component update (re-render).
@@ -85,6 +89,8 @@ const Ingredients = () => {
 
    const removeIngredientHandler = ingredientId => {
 
+    setIsLoading(true);
+
       fetch(
         `https://learning-react-hooks-fa290.firebaseio.com/ingredients/${ingredientId}.json`,
       {
@@ -92,11 +98,18 @@ const Ingredients = () => {
     }
   ).then(response => {
 
+     setIsLoading(false);
+
     setUserIngredients(prevIngredients =>
       prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
       
 
       );
+
+    }).catch(error => {
+      
+      setError(error.message);
+
 
     });
 
@@ -105,10 +118,17 @@ const Ingredients = () => {
 
   return (
     <div className="App">
-      <IngredientForm onAddIngredient={addIngredientHandler} />
+      <IngredientForm 
+      onAddIngredient={addIngredientHandler}
+      loading={isLoading}
+
+      />
 
       <section>
-        <Search onLoadIngredients={filteredIngredientsHandler} />
+        <Search 
+        onLoadIngredients={filteredIngredientsHandler} 
+
+        />
         
         <IngredientList 
         ingredients={userIngredients} 
