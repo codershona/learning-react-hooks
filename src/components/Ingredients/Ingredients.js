@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -44,10 +44,11 @@ const Ingredients = () => {
 
    }, [userIngredients]);
 
-   const filteredIngredientsHandler = filteredIngredients => {
+   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     setUserIngredients(filteredIngredients);
 
-   }
+   }, [setUserIngredients]);
+
 
    const addIngredientHandler = ingredient => {
    	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json', {
