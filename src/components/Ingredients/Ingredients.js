@@ -12,31 +12,31 @@ const Ingredients = () => {
   // Used like this, useEffect() acts like componentDidMoun: it runs the function AFTER EVERY component update (re-render).
 
 
-   useEffect(() => {
+   // useEffect(() => {
 
-   	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json')
-   	.then(response => response.json())
-   	 .then(responseData => {
-   		const loadedIngredients = [];
-   		for (const key in responseData) {
-   			loadedIngredients.push({
-   				id: key,
-   				title: responseData[key].title,
-   				amount: responseData[key].amount
-
-
-   			});
-
-   		}
-
-   setUserIngredients(loadedIngredients);
+   // 	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json')
+   // 	.then(response => response.json())
+   // 	 .then(responseData => {
+   // 		const loadedIngredients = [];
+   // 		for (const key in responseData) {
+   // 			loadedIngredients.push({
+   // 				id: key,
+   // 				title: responseData[key].title,
+   // 				amount: responseData[key].amount
 
 
-   	});
-   	 // Used like this, (with [] as a second argument), ueEffect() acts like componentDidMount : It runs ONLY ONCE (after the first render).
+   // 			});
+
+   // 		}
+
+   // setUserIngredients(loadedIngredients);
 
 
-   }, []); 
+   // 	});
+   // 	 // Used like this, (with [] as a second argument), ueEffect() acts like componentDidMount : It runs ONLY ONCE (after the first render).
+
+
+   // }, []); 
 
 
    useEffect(() => {
