@@ -34,7 +34,7 @@ const Search = React.memo(props => {
 
    // setUserIngredients(loadedIngredients);
    // ...
-   // onLoadIngredients(loadedIngredients);
+    onLoadIngredients(loadedIngredients);
 
 
      });
@@ -51,7 +51,7 @@ const Search = React.memo(props => {
           <label>Filter by Title</label>
           <input type="text" 
           value={enteredFilter} 
-          onChange={event => setEnteredFilter(event.taget.value)}
+          onChange={event => setEnteredFilter(event.target.value)}
            />
         </div>
       </Card>

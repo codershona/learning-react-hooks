@@ -47,7 +47,7 @@ const Ingredients = () => {
    const filteredIngredientsHandler = useCallback(filteredIngredients => {
     setUserIngredients(filteredIngredients);
 
-   }, [setUserIngredients]);
+   }, []);
 
 
    const addIngredientHandler = ingredient => {
