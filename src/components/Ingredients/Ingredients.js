@@ -9,6 +9,9 @@ const Ingredients = () => {
 
   const [ userIngredients, setUserIngredients ] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+
   // Used like this, useEffect() acts like componentDidMoun: it runs the function AFTER EVERY component update (re-render).
 
 
@@ -51,6 +54,10 @@ const Ingredients = () => {
 
 
    const addIngredientHandler = ingredient => {
+
+    setIsLoading(true);
+
+
    	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json', {
    		method: 'POST',
    		body: JSON.stringify(ingredient),
@@ -58,6 +65,8 @@ const Ingredients = () => {
    	})
 
     .then(response => {
+
+      setIsLoading(false);
 
    	return response.json();
 
@@ -101,7 +110,10 @@ const Ingredients = () => {
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
         
-        <IngredientList ingredients={userIngredients} onRemoveItem={() => {}} />
+        <IngredientList 
+        ingredients={userIngredients} 
+        onRemoveItem={removeIngredientHandler} 
+        />
 
 
 
