@@ -107,17 +107,30 @@ const Ingredients = () => {
       );
 
     }).catch(error => {
-      
-      setError(error.message);
+
+      setError('Please Try Again!');
+      setIsLoading(false);
 
 
     });
 
  };
 
+ const clearError = () => {
+
+  setError(null);
+  
+  // setIsLoading(false);
+
+ }
+
 
   return (
     <div className="App">
+
+     {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+
+
       <IngredientForm 
       onAddIngredient={addIngredientHandler}
       loading={isLoading}
