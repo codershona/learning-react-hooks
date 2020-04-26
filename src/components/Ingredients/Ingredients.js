@@ -55,13 +55,13 @@ const Ingredients = () => {
    		method: 'POST',
    		body: JSON.stringify(ingredient),
    		headers: { 'Content-Type': 'application/json' } 
-   	}).then(response => {
+   	})
+
+    .then(response => {
 
    	return response.json();
 
-  
-
-   	}).then(responseData => {
+   }).then(responseData => {
 
    		  setUserIngredients(prevIngredients => [
     	...prevIngredients, 
@@ -72,6 +72,26 @@ const Ingredients = () => {
    	});
 
    };
+
+
+   const removeIngredientHandler = ingredientId => {
+
+      fetch(
+        `https://learning-react-hooks-fa290.firebaseio.com/ingredients/${ingredientId}.json`,
+      {
+      method: 'DELETE'
+    }
+  ).then(response => {
+
+    setUserIngredients(prevIngredients =>
+      prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
+      
+
+      );
+
+    });
+
+ };
 
 
   return (
