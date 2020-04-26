@@ -34,7 +34,7 @@ const Search = React.memo(props => {
 
    // setUserIngredients(loadedIngredients);
    // ...
-   onLoadIngredients(loadedIngredients);
+   // onLoadIngredients(loadedIngredients);
 
 
      });
