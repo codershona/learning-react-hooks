@@ -92,7 +92,7 @@ const Ingredients = () => {
     setIsLoading(true);
 
       fetch(
-        `https://learning-react-hooks-fa290.firebaseio.com/ingredients/${ingredientId}.json`,
+        `https://learning-react-hooks-fa290.firebaseio.com/ingredients/${ingredientId}.jon`,
       {
       method: 'DELETE'
     }
