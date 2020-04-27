@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback } from 'react';
+import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -211,7 +211,20 @@ const Ingredients = () => {
   
   // setIsLoading(false);
 
- }
+ };
+
+ const ingredientList = useMemo(() => {
+    return  ( 
+        <IngredientList 
+        ingredients={userIngredients} 
+        onRemoveItem={removeIngredientHandler} 
+
+        />
+     );
+
+ }, [userIngredients, removeIngredientHandler]);
+
+
 
 
   return (
@@ -228,18 +241,12 @@ const Ingredients = () => {
 
       <section>
         <Search 
-        onLoadIngredients={filteredIngredientsHandler} 
-
-        />
-        
-        <IngredientList 
-        ingredients={userIngredients} 
-        onRemoveItem={removeIngredientHandler} 
+        onLoadIngredients={filteredIngredientsHandler}
         />
 
-
-
-      </section>
+         {ingredientList} 
+      
+       </section>
     </div>
   );
 }
