@@ -43,17 +43,24 @@ const Ingredients = () => {
 
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
 
-   const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp();
+   const { 
+    isLoading, 
+    error, 
+    data, 
+    sendRequest,
+    reqExtra, 
+    reqIdentifier 
+  } = useHttp();
   
   
    useEffect(() => {
    	// console.log('RENDERING INGREDIENTS', userIngredients);
 
-    if (reqIdentifier === 'REMOVE_INGREDIENT') {
+    if (!isLoading && !error && reqIdentifier === 'REMOVE_INGREDIENT') {
 
       dispatch({ type: 'DELETE', id: reqExtra });
 
-    } else if (reqIdentifier === 'ADD_INGREDIENT') {
+    } else if (!isLoading && !error && reqIdentifier === 'ADD_INGREDIENT' ) {
 
       dispatch({
 
@@ -65,7 +72,7 @@ const Ingredients = () => {
     }
     
 
-   }, [data, reqExtra, reqIdentifier]);
+   }, [data, reqExtra, reqIdentifier, isLoading, error]);
 
    const filteredIngredientsHandler = useCallback(filteredIngredients => {
     
