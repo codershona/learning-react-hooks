@@ -2,10 +2,10 @@ import React from 'react';
 
 import './IngredientList.css';
 
-const IngredientList = props => {
+const IngredientList = React.memo(props => {
  
  console.log('RENDERING INGREDIENTLIST');
- 
+
 
   return (
     <section className="ingredient-list">
@@ -20,6 +20,6 @@ const IngredientList = props => {
       </ul>
     </section>
   );
-};
+});
 
 export default IngredientList;

@@ -164,7 +164,7 @@ const Ingredients = () => {
 
 
 
-   const removeIngredientHandler = ingredientId => {
+   const removeIngredientHandler = useCallback(ingredientId => {
 
     // setIsLoading(true);
 
@@ -199,7 +199,7 @@ const Ingredients = () => {
 
     });
 
- };
+ }, []);
 
 
  const clearError = () => {
