@@ -43,16 +43,32 @@ const Ingredients = () => {
 
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
 
-   const { isLoading, error, data, sendRequest } = useHttp();
+   const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp();
   
   
    useEffect(() => {
-   	console.log('RENDERING INGREDIENTS', userIngredients);
+   	// console.log('RENDERING INGREDIENTS', userIngredients);
 
-   }, [userIngredients]);
+    if (reqIdentifier === 'REMOVE_INGREDIENT') {
+
+      dispatch({ type: 'DELETE', id: reqExtra });
+
+    } else if (reqIdentifier === 'ADD_INGREDIENT') {
+
+      dispatch({
+
+      type: 'ADD',
+
+      ingredient: { id: data.name, ...reqExtra } 
+
+        });
+    }
+    
+
+   }, [data, reqExtra, reqIdentifier]);
 
    const filteredIngredientsHandler = useCallback(filteredIngredients => {
-    // setUserIngredients(filteredIngredients);
+    
 
     dispatch({ type: 'SET', ingredients: filteredIngredients });
 
@@ -62,6 +78,15 @@ const Ingredients = () => {
 
 
    const addIngredientHandler = useCallback(ingredient => {
+
+    sendRequest(
+      'https://learning-react-hooks-fa290.firebaseio.com/ingredients.json', 
+      'POST', 
+      JSON.stringify(ingredient),
+      ingredient,
+      'ADD_INGREDIENT'
+
+      );
 
    // dispatchHttp({type: 'SEND'});
 
@@ -99,7 +124,10 @@ const Ingredients = () => {
 
     // dispatchHttp({type: 'SEND'});
     sendRequest(`https://learning-react-hooks-fa290.firebaseio.com/ingredients/${ingredientId}.json`, 
-      'DELETE'
+      'DELETE',
+      null,
+      ingredientId,
+      'REMOVE_INGREDIENT'
       );
 
   }, [sendRequest]);
