@@ -202,7 +202,7 @@ const Ingredients = () => {
  }, []);
 
 
- const clearError = () => {
+ const clearError = useCallback(() => {
 
   // setError(null);
 
@@ -211,7 +211,7 @@ const Ingredients = () => {
   
   // setIsLoading(false);
 
- };
+ }, []);
 
  const ingredientList = useMemo(() => {
     return  ( 
