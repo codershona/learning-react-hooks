@@ -36,9 +36,6 @@ const ingredientReducer = (currentIngredients, action) => {
 
 
 
-
-
-
 const Ingredients = () => {
 
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
@@ -49,12 +46,12 @@ const Ingredients = () => {
     data, 
     sendRequest,
     reqExtra, 
-    reqIdentifier 
+    reqIdentifier,
+    clear 
   } = useHttp();
   
   
    useEffect(() => {
-   	// console.log('RENDERING INGREDIENTS', userIngredients);
 
     if (!isLoading && !error && reqIdentifier === 'REMOVE_INGREDIENT') {
 
@@ -95,33 +92,8 @@ const Ingredients = () => {
 
       );
 
-   // dispatchHttp({type: 'SEND'});
 
-   // 	fetch('https://learning-react-hooks-fa290.firebaseio.com/ingredients.json', {
-   // 		method: 'POST',
-   // 		body: JSON.stringify(ingredient),
-   // 		headers: { 'Content-Type': 'application/json' } 
-   // 	})
-
-   //  .then(response => {
-
-   //    dispatchHttp({type: 'RESPONSE'});
-
-   // 	return response.json();
-
-   // })
-   //  .then(responseData => {
-
-
-   //   dispatch({
-   //    type: 'ADD', 
-   //    ingredient: { id: responseData.name, ...ingredient } 
-
-   //      });
-
-   // 	});
-
-   }, []);
+   }, [sendRequest]);
 
 
 
@@ -129,7 +101,6 @@ const Ingredients = () => {
    const removeIngredientHandler = useCallback(ingredientId => {
 
 
-    // dispatchHttp({type: 'SEND'});
     sendRequest(`https://learning-react-hooks-fa290.firebaseio.com/ingredients/${ingredientId}.json`, 
       'DELETE',
       null,
@@ -140,13 +111,11 @@ const Ingredients = () => {
   }, [sendRequest]);
 
 
- const clearError = useCallback(() => {
+ // const clearError = useCallback(() => {
 
+ //    clear(); 
 
-  // dispatchHttp({ type: 'CLEAR' });
-
-
- }, []);
+ // }, []);
 
  const ingredientList = useMemo(() => {
     return  ( 
@@ -166,7 +135,7 @@ const Ingredients = () => {
     <div className="App">
 
      {error && (
-      <ErrorModal onClose={clearError}>{error}</ErrorModal>
+      <ErrorModal onClose={clear}>{error}</ErrorModal>
 
     )}
 
