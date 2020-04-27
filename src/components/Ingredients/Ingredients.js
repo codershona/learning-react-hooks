@@ -123,7 +123,7 @@ const Ingredients = () => {
 
 
 
-   const addIngredientHandler = ingredient => {
+   const addIngredientHandler = useCallback(ingredient => {
 
     // setIsLoading(true);
    dispatchHttp({type: 'SEND'});
@@ -159,7 +159,7 @@ const Ingredients = () => {
 
    	});
 
-   };
+   }, []);
 
 
 
